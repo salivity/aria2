@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Config aria2 to drop download if resume unsupported? - aria2</title>
+    <meta name="description" content="This article provides a direct solution for configuring the aria2 command-line download utility to automatically abort a download if the remote server does not support resuming. By default, aria2 will restart a download from scratch if a connection drops">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/config-aria2-to-drop-download-if-resume-unsupported">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Config aria2 to drop download if resume unsupported? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/config-aria2-to-drop-download-if-resume-unsupported" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a direct solution for configuring the aria2 command-line download utility to automatically abort a download if the remote server does not support resuming. By default, aria2 will restart a download from scratch if a connection drops" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="config-aria2-to-drop-download-if-resume-unsupported">Config
+aria2 to drop download if resume unsupported?</h1>
+<p>This article provides a direct solution for configuring the
+<code>aria2</code> command-line download utility to automatically abort
+a download if the remote server does not support resuming. By default,
+<code>aria2</code> will restart a download from scratch if a connection
+drops and the server lacks resume capabilities, which can waste
+significant time and bandwidth. Below, you will find the specific
+configuration flags required to change this behavior, along with
+examples for both the command line and configuration files.</p>
+<h2 id="the-aria2c-configuration-flags">The <code>aria2c</code>
+Configuration Flags</h2>
+<p>To force <code>aria2</code> to drop a download when resume is
+unsupported, you need to combine two specific command-line options:
+<code>--conditional-get</code> and <code>--allow-overwrite</code>.</p>
+<ul>
+<li><strong><code>--conditional-get=true</code></strong>: This tells
+<code>aria2</code> to check if the remote file has been modified or if
+the server supports the features required to resume. If the server does
+not support the necessary headers (like <code>ETag</code> or
+<code>Last-Modified</code>) to validate and resume the transfer safely,
+<code>aria2</code> will handle the download based on your overwrite
+settings.</li>
+<li><strong><code>--allow-overwrite=false</code></strong>: When set to
+false, this prevents <code>aria2</code> from simply deleting your
+existing partial download and starting over from 0% when a resume fails.
+Instead, it will throw an error and terminate the process.</li>
+</ul>
+<h2 id="command-line-implementation">Command Line Implementation</h2>
+<p>When starting a download from the terminal, you can append these
+flags directly to your command:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--conditional-get</span><span class="op">=</span>true <span class="at">--allow-overwrite</span><span class="op">=</span>false <span class="st">&quot;https://example.com/largefile.zip&quot;</span></span></code></pre></div>
+<p>If the server at <code>example.com</code> does not support resuming,
+<code>aria2</code> will stop immediately instead of wiping your progress
+and restarting the download from the beginning.</p>
+<h2 id="persistent-configuration-file-setup">Persistent Configuration
+File Setup</h2>
+<p>If you prefer not to type these flags every time, you can add them to
+your global <code>aria2</code> configuration file (typically located at
+<code>~/.config/aria2/aria2.conf</code> on Linux/macOS or in the same
+directory as the executable on Windows).</p>
+<p>Open your <code>aria2.conf</code> file and add the following
+lines:</p>
+<pre class="text"><code># Abort download if resume is not supported by the server
+conditional-get=true
+allow-overwrite=false
+</code></pre>
+<p>Once saved, <code>aria2</code> will apply this logic to all future
+download tasks automatically, safeguarding your bandwidth against
+unresumable connections.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

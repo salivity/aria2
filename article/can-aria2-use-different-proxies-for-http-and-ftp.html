@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can aria2 use different proxies for HTTP and FTP? - aria2</title>
+    <meta name="description" content="aria2 does not natively support assigning different proxy servers to the HTTP and FTP protocols simultaneously through its standard configuration options. While it allows you to define distinct proxy environmental variables or command-line flags for each">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/can-aria2-use-different-proxies-for-http-and-ftp">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Can aria2 use different proxies for HTTP and FTP? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/can-aria2-use-different-proxies-for-http-and-ftp" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="aria2 does not natively support assigning different proxy servers to the HTTP and FTP protocols simultaneously through its standard configuration options. While it allows you to define distinct proxy environmental variables or command-line flags for each" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="can-aria2-use-different-proxies-for-http-and-ftp">Can aria2 use
+different proxies for HTTP and FTP?</h1>
+<p><strong>aria2</strong> does not natively support assigning different
+proxy servers to the HTTP and FTP protocols simultaneously through its
+standard configuration options. While it allows you to define distinct
+proxy environmental variables or command-line flags for each protocol,
+aria2 handles proxy settings globally during a execution session,
+meaning the last defined proxy or the catch-all
+<code>---all-proxy</code> setting typically overrides and standardizes
+the proxy backend for all concurrent downloads. To achieve simultaneous
+protocol-specific proxying, users must run separate aria2 instances or
+utilize a local proxy router like Privoxy.</p>
+<h3 id="the-limitations-of-aria2s-proxy-architecture">The Limitations of
+aria2's Proxy Architecture</h3>
+<p>When configuring aria2, you generally rely on specific input
+parameters or environment variables to route your traffic. The
+application recognizes the following proxy flags:</p>
+<ul>
+<li><code>--http-proxy</code> (or <code>http_proxy</code> environment
+variable)</li>
+<li><code>--ftp-proxy</code> (or <code>ftp_proxy</code> environment
+variable)</li>
+<li><code>--all-proxy</code> (or <code>all_proxy</code> environment
+variable)</li>
+</ul>
+<p>In theory, these flags suggest independent routing. In practice,
+however, aria2's internal download engine initializes a single network
+subsystem per session. When you attempt to pass both an HTTP proxy and
+an FTP proxy to a single <code>aria2c</code> command, the program
+struggles to split the traffic concurrently across different proxy
+protocols (such as SOCKS5 for one and HTTP Connect for another).
+Instead, it will either default to the <code>all-proxy</code> setting or
+apply the premier proxy configuration to all outgoing requests in that
+queue, leading to connection failures on the mismatched protocol.</p>
+<h3
+id="workarounds-for-simultaneous-multi-proxy-downloading">Workarounds
+for Simultaneous Multi-Proxy Downloading</h3>
+<p>If your workflow absolutely requires downloading HTTP and FTP links
+at the same time using different proxies, you can bypass this limitation
+using two primary methods.</p>
+<h4 id="1-running-dual-aria2-instances">1. Running Dual aria2
+Instances</h4>
+<p>The simplest approach is to isolate your download queues by launching
+two separate processes of aria2. You can dedicate one instance to your
+HTTP traffic and the other to your FTP traffic, defining the respective
+proxy for each.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instance 1: Dedicated to HTTP downloads</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--http-proxy</span><span class="op">=</span><span class="st">&quot;http://proxy1.local:8080&quot;</span> http://example.com/file.zip</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Instance 2: Dedicated to FTP downloads</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--ftp-proxy</span><span class="op">=</span><span class="st">&quot;http://proxy2.local:8080&quot;</span> ftp://example.com/file.tar.gz</span></code></pre></div>
+<h4 id="2-utilizing-a-loopback-proxy-router">2. Utilizing a Loopback
+Proxy Router</h4>
+<p>For a more integrated solution, you can route aria2 through a local
+proxy forwarding service like Privoxy or Squid.</p>
+<p>In this setup, you configure aria2 to point all traffic to your local
+Privoxy instance (<code>127.0.0.1:8118</code>) using the
+<code>--all-proxy</code> flag. You then configure Privoxy's routing
+rules to inspect the destination URL scheme. Privoxy can seamlessly
+forward all incoming HTTP requests to your HTTP proxy and all FTP
+requests to your FTP proxy, handling the simultaneous protocol split
+externally.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

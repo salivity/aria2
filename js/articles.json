@@ -1,0 +1,662 @@
+[
+  [
+    110,
+    "What are the risks of exposing aria2 RPC to the internet?",
+    "Exposing the aria2 Remote Procedure Call (RPC) port—typically TCP port 6800—directly to the public internet presents a critical security risk that almost always leads to a full system compromise. Because aria2 is a highly performant utility designed",
+    false
+  ],
+  [
+    109,
+    "How to Force aria2 to Verify a Torrent File?",
+    "Using the command-line download utility aria2 to check the integrity of an existing file against a torrent without triggering any data download is a straightforward process achieved by combining specific configuration flags. By default, aria2 will automa",
+    false
+  ],
+  [
+    108,
+    "Containerizing aria2 with Docker: RPC Port Guide",
+    "This article provides a comprehensive guide on how to containerize the aria2 download utility using Docker and correctly configure its Remote Procedure Call (RPC) functionality. We will cover the specific network ports required for secure remote manageme",
+    false
+  ],
+  [
+    107,
+    "How Does aria2 Prioritize BitTorrent Trackers?",
+    "This article provides a technical overview of how the lightweight, multi-protocol download utility aria2 manages and prioritizes BitTorrent trackers when connecting to a swarm. It explores the default sequential announce strategy, the impact of the --bt-",
+    false
+  ],
+  [
+    106,
+    "What is the aria2 --lowest-speed-limit Setting?",
+    "The --lowest-speed-limit option in aria2 is a command-line configuration used to manage and optimize download efficiency. It sets a minimum threshold for download speeds, allowing aria2 to automatically drop slow or stalled connections and switch to fast",
+    false
+  ],
+  [
+    105,
+    "How to Fix aria2 Magnet Link Metadata Download Failure?",
+    "When using aria2 to download files via magnet links, you may occasionally encounter a frustrating loop where the client continuously fails to fetch the torrent metadata. This issue typically stems from connectivity bottlenecks, blocked ports, or a lack o",
+    false
+  ],
+  [
+    104,
+    "How to stop aria2 download after a certain time",
+    "This article provides a direct answer to stopping an aria2 download automatically after a specific duration has passed. You will learn the exact command-line parameter required, its proper syntax, and practical examples to implement this time-limit featu",
+    false
+  ],
+  [
+    103,
+    "Can aria2 Automatically Extract Archives After Downloading?",
+    "While aria2 is a highly efficient, lightweight, and multi-protocol command-line download utility, it does not have a built-in, native feature to automatically extract compressed archives like .zip, .tar.gz, or .rar files upon completion. However, aria2 p",
+    false
+  ],
+  [
+    102,
+    "How Does aria2 Manage Chunk Validation?",
+    "The multi-protocol download utility aria2 optimizes file transfers by splitting files into segments and downloading them concurrently, but its ability to validate chunks and recover from corruption depends heavily on the download protocol and metadata pr",
+    false
+  ],
+  [
+    101,
+    "How to Check Aria2 Download Link Without Downloading?",
+    "To verify the validity and details of a download link in aria2 without actually fetching the full file, you can use the --dry-run parameter. This command allows aria2 to connect to the server, validate the URL, and check file availability or size while s",
+    false
+  ],
+  [
+    100,
+    "How to export aria2 session cookies to a file?",
+    "Exporting session cookies gathered by the aria2 download utility to a local file allows you to preserve authentication states and share session information across different downloads or network tasks. While aria2 can load cookies effortlessly using the -",
+    false
+  ],
+  [
+    99,
+    "Does aria2 Support Netscape cookies.txt Files?",
+    "The command-line download utility aria2 natively supports reading HTTP cookies from files formatted in the standard Netscape/Mozilla cookies.txt layout. This capability allows users to seamlessly pass session data and authentication states from web brows",
+    false
+  ],
+  [
+    98,
+    "How to Pass Cookies to aria2?",
+    "This article provides a practical guide on how to pass authentication cookies to the aria2 command-line download utility. When downloading files from websites that require a login, providing session cookies is essential to prevent \"403 Forbidden\" or \"401",
+    false
+  ],
+  [
+    97,
+    "Can aria2 Download a File Directly Into Memory?",
+    "This article explores whether the popular command-line download utility, aria2, can download files strictly into memory (RAM) instead of writing them to a physical disk. We will look at aria2's native capabilities, why this feature is highly requested fo",
+    false
+  ],
+  [
+    96,
+    "How to Change aria2 Progress Summary Interval?",
+    "To change how frequently the aria2 command-line download utility prints its progress summary to the console, you must use the --summary-interval option. By default, aria2 outputs a status update—showing the download speed, progress percentage, and esti",
+    false
+  ],
+  [
+    95,
+    "How to Format Console Output in aria2?",
+    "This article provides a quick overview of how to customize and control the console output format in the aria2 download utility. It covers the specific command-line parameter required to change the log and console styles, explains the available formatting",
+    false
+  ],
+  [
+    94,
+    "Config aria2 to drop download if resume unsupported?",
+    "This article provides a direct solution for configuring the aria2 command-line download utility to automatically abort a download if the remote server does not support resuming. By default, aria2 will restart a download from scratch if a connection drops",
+    false
+  ],
+  [
+    93,
+    "Aria2 Disk Full Error: What Happens & How Is It Logged?",
+    "When the lightweight download utility aria2 encounters a disk full error, it immediately halts the affected download, updates its internal status to indicate a failure, and outputs a specific error message to both the console and its log files. This arti",
+    false
+  ],
+  [
+    92,
+    "How to Disable IPv6 in aria2?",
+    "This article provides a direct answer and practical guide on whether you can disable IPv6 support entirely when running an aria2 command. You will learn the specific command-line options and configuration settings required to force aria2 to use IPv4 excl",
+    false
+  ],
+  [
+    91,
+    "How does aria2 handle IPv4 and IPv6 by default?",
+    "This article provides a comprehensive overview of how the lightweight, multi-protocol download utility aria2 manages network traffic in dual-stack IPv4 and IPv6 environments. By default, aria2 is designed to be dual-stack aware, but its exact behavior de",
+    false
+  ],
+  [
+    90,
+    "What Does the aria2 --conditional-get Flag Do?",
+    "The --conditional-get flag in aria2 is a powerful feature that optimizes file downloads by checking if a remote file has changed before downloading it again. When enabled, aria2 leverages HTTP headers to verify the file's modification status on the serve",
+    false
+  ],
+  [
+    89,
+    "How to ignore remote file timestamp in aria2?",
+    "When downloading files using the command-line utility aria2, the program automatically attempts to preserve the remote file's modification time and apply it to your local file. This quick overview explains how to override this behavior, the specific comm",
+    false
+  ],
+  [
+    88,
+    "How to Limit the aria2 Log File Size Before It Rotates?",
+    "The size of the aria2 log file is controlled and limited by the --log-max-size parameter. When the log file reaches the threshold defined by this setting, aria2 automatically rotates the log, renaming the old file and starting a fresh one. By default, th",
+    false
+  ],
+  [
+    87,
+    "How to Enable Debug Logging to a File in aria2?",
+    "This article provides a straightforward guide on how to configure the aria2 download utility to output detailed debug-level logs directly to a file. By default, aria2 operates quietly to save system resources, but enabling verbose debug logging is essent",
+    false
+  ],
+  [
+    86,
+    "How to Change the aria2 Default User-Agent String?",
+    "When downloading files using the aria2 command-line utility, you can change the default user-agent string presented to HTTP/HTTPS servers by using the --user-agent flag. Modifying this string is often necessary when servers block the default aria2 identi",
+    false
+  ],
+  [
+    85,
+    "Can aria2 Automatically Run a Script After Download?",
+    "The command-line download utility aria2 can automatically execute a script upon the completion of a download. This automation is achieved by utilizing the --on-download-complete option, which passes specific event parameters to a designated shell script",
+    false
+  ],
+  [
+    84,
+    "How to Bind aria2 to a Specific Network Interface?",
+    "This article provides a quick overview and step-by-step guide on how to configure the aria2 download utility to route all outbound traffic through a specific network interface or IP address. By default, aria2 utilizes the system's default routing table,",
+    false
+  ],
+  [
+    83,
+    "How to check aria2 proxy environment variables?",
+    "To configure aria2 to automatically detect and use the proxy settings defined in your operating system, you need to utilize a specific command-line option. By applying this parameter, aria2 will look for standard system environment variables such as http",
+    false
+  ],
+  [
+    82,
+    "How to Bypass Proxy for Specific Domains in aria2?",
+    "To configure aria2 to bypass a proxy for specific domains or IP addresses, you must use the no-proxy option in your configuration file or via the command line. While aria2 allows you to route your download traffic through HTTP, HTTPS, or FTP proxies, cer",
+    false
+  ],
+  [
+    81,
+    "Can aria2 use different proxies for HTTP and FTP?",
+    "aria2 does not natively support assigning different proxy servers to the HTTP and FTP protocols simultaneously through its standard configuration options. While it allows you to define distinct proxy environmental variables or command-line flags for each",
+    false
+  ],
+  [
+    80,
+    "How to Route aria2 Downloads Through an HTTP Proxy?",
+    "Configuring the aria2 download manager to route its traffic through an HTTP proxy ensures that all your file downloads are masked, secure, or redirected according to your network requirements. This guide will walk you through the precise command-line arg",
+    false
+  ],
+  [
+    79,
+    "How to Add Comments in an aria2 Configuration File?",
+    "This article provides a quick overview and direct answer on how to include comments within an aria2 configuration file (aria2.conf). It covers the specific syntax required to comment out lines, rules regarding line placement, and best practices for organ",
+    false
+  ],
+  [
+    78,
+    "Do aria2 CLI arguments override config file settings?",
+    "This article explains the precedence rules between command-line arguments and configuration file settings in the aria2 download utility. When you run aria2, it frequently looks at multiple sources for its configuration, making it crucial to understand wh",
+    false
+  ],
+  [
+    77,
+    "How to Set Custom aria2 Config File Path?",
+    "This article provides a straightforward guide on how to specify a custom path for the aria2 configuration file using command-line flags. You will learn the exact syntax required to bypass the default configuration path, how to verify that your custom fil",
+    false
+  ],
+  [
+    76,
+    "Where Does aria2 Look for Its Config File on Linux?",
+    "The lightweight, multi-protocol command-line download utility aria2 relies on a specific initialization file, typically named aria2.conf, to load user-defined download preferences, speed limits, and session settings automatically. On a Linux system, aria",
+    false
+  ],
+  [
+    75,
+    "Can You Add a BitTorrent to aria2 via XML-RPC?",
+    "This article provides a direct guide on how to add a new BitTorrent download to a running aria2 daemon using XML-RPC calls. We will explore the specific method required, the format the torrent file must take, and a practical example of a request payload.",
+    false
+  ],
+  [
+    74,
+    "How to Pause or Unpause aria2 Downloads via RPC?",
+    "Managing downloads remotely can significantly streamline your server administration and automation workflows. This article provides a straightforward guide on how to pause and unpause active downloads using the aria2 Remote Procedure Call (RPC) API. You",
+    false
+  ],
+  [
+    73,
+    "What GUIs Can Control an aria2 RPC Daemon?",
+    "Managing downloads via a command line can be efficient, but utilizing a graphical user interface (GUI) or web frontend makes tracking and configuring tasks significantly easier. Because aria2 features a robust built-in JSON-RPC and XML-RPC interface, use",
+    false
+  ],
+  [
+    72,
+    "How to Configure aria2 RPC with WSS?",
+    "This article provides a step-by-step guide on how to secure the aria2 Remote Procedure Call (RPC) interface using a secure WebSocket (WSS) connection. By enabling WSS, you ensure that the communication between your web frontend (such as AriaNg) and your",
+    false
+  ],
+  [
+    71,
+    "Can aria2 RPC Accept CORS Requests?",
+    "The aria2 RPC server can accept Cross-Origin Resource Sharing (CORS) requests, allowing web-based download managers and frontends to communicate with it directly from a browser. This capability is crucial for web interfaces like AriaNg or yaaw, which run",
+    false
+  ],
+  [
+    70,
+    "Securing aria2 RPC with a Secret Token",
+    "This article provides a straightforward guide on how to secure the aria2 Remote Procedure Call (RPC) interface by implementing a secret authorization token. You will learn how to configure the token in your configuration file, apply it via the command li",
+    false
+  ],
+  [
+    69,
+    "How to Set aria2 RPC Listening Port?",
+    "The aria2c command-line download utility allows users to enable a Remote Procedure Call (RPC) server for remote management and automation. When starting this server, you can customize the specific port it listens on by using a dedicated command-line flag",
+    false
+  ],
+  [
+    68,
+    "How to Enable aria2 RPC Server from Terminal?",
+    "Enabling the Remote Procedure Call (RPC) server in aria2 allows you to control the lightweight download utility remotely via web interfaces, extensions, or external scripts. By default, this feature is disabled for security and resource management. This",
+    false
+  ],
+  [
+    67,
+    "What is the Purpose of the aria2 JSON-RPC Interface?",
+    "The JSON-RPC interface in aria2 is a powerful programming interface that allows external applications and scripts to remotely control and interact with the aria2 download manager. By enabling this interface, developers and users can add, pause, remove, a",
+    false
+  ],
+  [
+    66,
+    "How to Run aria2 in Background as Daemon?",
+    "This article provides a quick overview and a step-by-step guide on how to run aria2, the lightweight multi-protocol download utility, in the background as a persistent daemon process. Operating aria2 as a background service allows you to pass download ta",
+    false
+  ],
+  [
+    65,
+    "How to Prioritize Server Locations or Protocols in aria2?",
+    "Using Metalink files in aria2 allows you to download files from multiple mirrors and protocols simultaneously, maximizing your download speed. However, you might want to force aria2 to prefer a specific geographic server location or a particular protocol",
+    false
+  ],
+  [
+    64,
+    "Can aria2 Fall Back to BitTorrent if HTTP Fails?",
+    "This article examines how the aria2 download utility handles protocol fallbacks within Metalink files. Specifically, it explores whether aria2 can automatically switch to BitTorrent swarms if the HTTP or FTP mirrors specified in a Metalink document becom",
+    false
+  ],
+  [
+    63,
+    "Does aria2 Verify Chunk Checksums in Metalink?",
+    "When downloading files via Metalink, aria2 automatically verifies chunk-level checksums to ensure data integrity. By validating these smaller pieces of a file during the download process rather than waiting until the entire file is complete, aria2 can de",
+    false
+  ],
+  [
+    62,
+    "How to Start aria2 Download with Local Metalink File?",
+    "This article provides a quick overview and step-by-step guide on how to use a locally saved Metalink file to initiate a download using the aria2 command-line utility. You will learn the exact command syntax, how aria2 processes Metalink files to optimize",
+    false
+  ],
+  [
+    61,
+    "What Is a Metalink File and How Does aria2 Use It?",
+    "A Metalink file is an XML-based document that aggregates multiple download sources, verification checksums, and file metadata into a single package to improve download speed and reliability. When processed by aria2—a lightweight, multi-protocol command",
+    false
+  ],
+  [
+    60,
+    "How to Preallocate Disk Space in aria2?",
+    "Configuring aria2 to pre-allocate disk space before starting a large download helps prevent disk fragmentation and ensures that your storage media has sufficient room for the files before investing time and bandwidth. This article explains the benefits o",
+    false
+  ],
+  [
+    59,
+    "Does aria2 support resuming Metalink downloads?",
+    "This article examines the capabilities of the command-line download utility aria2 regarding the resumption of interrupted Metalink downloads. While aria2 natively supports resuming standard downloads and reads Metalink files to orchestrate multi-source t",
+    false
+  ],
+  [
+    58,
+    "How to Remove aria2 Control Files on Download Failure",
+    "When a download fails or is interrupted in aria2, the utility leaves behind a .aria2 control file to allow for future session resumption. However, if you prefer a clean workspace or want to automate the cleanup of failed downloads, you can configure aria",
+    false
+  ],
+  [
+    57,
+    "What Happens to aria2 File After Download Completes?",
+    "When you download a file using the aria2 command-line utility, it creates a control file with a .aria2 extension alongside your target file. This article explains the lifecycle of this control file, what happens to it upon successful download completion,",
+    false
+  ],
+  [
+    56,
+    "How to Gracefully Stop aria2 and Save Session State?",
+    "This article provides a quick overview and practical guide on how to safely terminate an active aria2c download process without losing your progress. When managing large downloads or multiple files via the command line, abruptly killing the process can c",
+    false
+  ],
+  [
+    55,
+    "Can aria2 periodically save its session state?",
+    "The popular command-line download utility aria2 can automatically and periodically save its active download session state to a designated file. This capability prevents the loss of your download progress in the event of an unexpected system crash, power",
+    false
+  ],
+  [
+    54,
+    "How to Load a Saved Session File in aria2?",
+    "When using the aria2 command-line download utility, you can resume and recover your previous download progress by loading a saved session file upon startup. This article explains the exact command-line flag required to import a session file, how to autom",
+    false
+  ],
+  [
+    53,
+    "How to Save aria2 Session State to a File?",
+    "This article provides a quick overview and step-by-step guide on how to force the aria2 command-line download utility to save its current download session state to a file. By default, aria2 does not automatically save your download progress in a readable",
+    false
+  ],
+  [
+    52,
+    "What is the Aria2 Control File Used For?",
+    "When downloading files using the aria2 command-line utility, you will often notice a companion file with a .aria2 extension created alongside your active download. This control file serves as a crucial metadata tracker that enables aria2's most powerful",
+    false
+  ],
+  [
+    51,
+    "How Does aria2 Resume Interrupted Downloads?",
+    "This article explains the underlying mechanism aria2 uses to resume interrupted HTTP and FTP downloads. It covers how the utility tracks download progress through control files, leverages protocol-specific headers like Range and REST, and ensures file in",
+    false
+  ],
+  [
+    50,
+    "How to Clear DHT Cache in aria2?",
+    "This article provides a straightforward guide on how to clear the Distributed Hash Table (DHT) routing table cache in the aria2 download utility. When downloading torrents, aria2 saves DHT node data to a cache file to speed up future connections; however",
+    false
+  ],
+  [
+    49,
+    "Does aria2 support BitTorrent Web-Seeding?",
+    "Yes, aria2 fully supports Web-Seeding (HTTP/FTP seeding) for BitTorrent downloads. It natively implements the BitTorrent Web-Seeding extension, allowing it to fetch file pieces directly from standard HTTP, HTTPS, or FTP servers when traditional BitTorren",
+    false
+  ],
+  [
+    48,
+    "Save Torrent Metadata as .torrent in aria2?",
+    "This article provides a quick overview and step-by-step guide on how to configure the aria2 download utility to automatically save torrent metadata as a local .torrent file when starting downloads from magnet links. By default, aria2 fetches this metadat",
+    false
+  ],
+  [
+    47,
+    "How to Check Torrent Integrity in aria2?",
+    "This article provides a straightforward guide on how to verify the local data integrity of a downloaded torrent using the aria2 command-line utility. You will learn the exact command-line options required to trigger a hash check, how to force a recheck o",
+    false
+  ],
+  [
+    46,
+    "How do you limit max peers per torrent in aria2?",
+    "Limiting the maximum number of connected peers per torrent in aria2 is a straightforward process achieved by using the --bt-max-peers configuration option. This setting allows users to manage their network bandwidth and system resources effectively by ca",
+    false
+  ],
+  [
+    45,
+    "Can aria2 Append Trackers to a Magnet Link?",
+    "Using the popular command-line download utility aria2, you cannot directly or automatically append external trackers to a magnet link during execution via a single command-line flag. When you pass a magnet link to aria2c, it fetches the torrent's metadat",
+    false
+  ],
+  [
+    44,
+    "How to Force aria2 Protocol Encryption?",
+    "This article provides a straightforward guide on how to configure the aria2 command-line download utility to strictly require BitTorrent protocol encryption (MSE/PE). By enforcing this setting, you can enhance your privacy and potentially bypass local ne",
+    false
+  ],
+  [
+    43,
+    "How to Select Specific Files in an aria2 Torrent",
+    "When downloading a multi-file torrent using the aria2 command-line utility, you can select specific files to download by using the --select-file parameter. This option allows you to specify the exact index numbers of the files you want to retrieve, preve",
+    false
+  ],
+  [
+    42,
+    "How to Enable or Disable IPv6 DHT in aria2?",
+    "Managing the Distributed Hash Table (DHT) for IPv6 networks in aria2 allows you to control how the download utility finds peers on modern network protocols. By default, aria2 enables DHT for IPv4, but IPv6 DHT must be configured explicitly depending on y",
+    false
+  ],
+  [
+    41,
+    "Is DHT supported in aria2 for trackerless torrents?",
+    "Yes, aria2 fully supports Distributed Hash Table (DHT) functionality, enabling users to download trackerless torrents and magnet links without needing a centralized tracker. This feature allows the command-line utility to discover peers directly through",
+    false
+  ],
+  [
+    40,
+    "How Does aria2 Handle BitTorrent PEX by Default?",
+    "This article provides a quick overview of how the lightweight, multi-protocol download utility aria2 manages BitTorrent Peer Exchange (PEX) by default. It covers the default enablement of the feature, its dependency on the Extension Protocol, and how it",
+    false
+  ],
+  [
+    39,
+    "How to Set aria2 BitTorrent Port Range?",
+    "Configuring the network ports for BitTorrent traffic in aria2 is essential for optimizing download speeds, ensuring proper port forwarding, and navigating firewall restrictions. By default, aria2 utilizes a specific range of ports to establish connection",
+    false
+  ],
+  [
+    38,
+    "How to Limit aria2 Seeding Share Ratio?",
+    "This article provides a straightforward guide on how to configure the aria2 download utility to automatically stop seeding a torrent once it reaches a specific share ratio. By default, aria2 may continue seeding indefinitely, consuming valuable upload ba",
+    false
+  ],
+  [
+    37,
+    "Can aria2 Download Torrents Using Magnet Links?",
+    "This article provides a quick overview and step-by-step guide on how to use the lightweight, multi-protocol command-line utility aria2 to download torrent files directly using magnet links. While aria2 is widely known for handling HTTP/HTTPS and FTP down",
+    false
+  ],
+  [
+    36,
+    "How to Download .torrent Files Using aria2?",
+    "This guide provides a straightforward walkthrough on how to initiate a BitTorrent download using a local .torrent file with aria2, a lightweight, multi-protocol command-line download utility. You will learn the basic command syntax, essential configurati",
+    false
+  ],
+  [
+    35,
+    "How does aria2 manage segmented file selection?",
+    "The command-line download utility aria2 optimizes file transfers by breaking target files into multiple segments and fetching them concurrently across different connections or protocols. When executing segmented downloads, aria2 primarily uses a sequenti",
+    false
+  ],
+  [
+    34,
+    "How Does aria2 Manage DNS Caching?",
+    "This article explores how the lightweight, multi-protocol download utility aria2 handles Domain Name System (DNS) caching during high-volume download sessions. When downloading hundreds of files or establishing numerous concurrent connections, efficient",
+    false
+  ],
+  [
+    33,
+    "What Is the Minimum Split Size in aria2?",
+    "The minimum split size parameter (--min-split-size) in aria2 determines the smallest possible size of a file segment required to trigger an additional download connection. By enforcing a lower limit on segment sizes, this setting prevents the download ma",
+    false
+  ],
+  [
+    32,
+    "Can aria2 prioritize specific downloads over others when multiple are queued?",
+    "The lightweight command-line download utility aria2 handles queued items using a strict, position-based queue system rather than a dynamically assigned numerical priority level. While you cannot tag a download task with a specific priority level (such as",
+    false
+  ],
+  [
+    31,
+    "How to Limit aria2 Connections per Host?",
+    "This article provides a quick guide on how to configure aria2, the lightweight multi-protocol command-line download utility, to restrict the number of concurrent connections it opens to a single server. By default, aggressive downloading can lead to IP b",
+    false
+  ],
+  [
+    30,
+    "Does aria2 Support Segmented Downloading and How to Set Size?",
+    "This article provides a quick overview of aria2's capabilities regarding segmented downloading, explaining how it splits files into smaller chunks to accelerate download speeds. You will learn the exact command-line options required to enable multi-conne",
+    false
+  ],
+  [
+    29,
+    "How to Change aria2 Stalled Connection Timeout?",
+    "To prevent slow or frozen downloads from wasting system resources, aria2 allows users to customize how long the client waits before dropping a stalled connection. By configuring specific command-line flags or updating your configuration file, you can mod",
+    false
+  ],
+  [
+    28,
+    "How to Set Max Retry Attempts in aria2?",
+    "This article provides a quick overview of how to configure the maximum number of retry attempts for failed downloads in the aria2 command-line utility. You will learn the exact parameter to use, its default behavior, and how to apply it via both the comm",
+    false
+  ],
+  [
+    27,
+    "How to Auto Retry Failed Downloads in aria2?",
+    "This article provides a quick overview and practical guide on how to configure the command-line download utility aria2 to automatically retry failed downloads. By utilizing specific command-line flags or modifying your configuration file, you can ensure",
+    false
+  ],
+  [
+    26,
+    "What is the optimal number of connections per server for aria2?",
+    "The optimal number of connections per server for aria2 generally falls between 4 and 16, depending heavily on the target server's bandwidth limits and your local network capacity. While aria2 allows a maximum of 16 connections per server by default, maxi",
+    false
+  ],
+  [
+    25,
+    "How Does aria2 Allocate Connections For Downloads?",
+    "The aria2 download utility manages dynamic connection allocation by strictly separating total active file limits from the individual multi-connection parameters defined for each file. When processing multiple active downloads, aria2 does not dynamically",
+    false
+  ],
+  [
+    24,
+    "Can aria2 Limit Overall Upload Speed?",
+    "This article explains how to manage and limit the total upload bandwidth in the aria2 download utility. It covers the specific configuration parameters needed to restrict global upload speeds, provides practical examples for implementation, and highlight",
+    false
+  ],
+  [
+    23,
+    "How to Limit Download Speed in aria2 Session?",
+    "This article provides a quick, actionable guide on how to restrict the maximum download speed for a specific aria2 session. Whether you are running the utility via the command line or managing it through a configuration file, you will learn the exact fla",
+    false
+  ],
+  [
+    22,
+    "Difference Between aria2 -s and -x Flags",
+    "This article provides a clear comparison between the -s (--split) and -x (--max-connection-per-server) flags in the aria2 download utility. While both flags are essential for optimizing download speeds by enabling parallelism, they serve entirely differe",
+    false
+  ],
+  [
+    21,
+    "How to Increase Concurrent Downloads in aria2?",
+    "The lightweight, multi-protocol command-line download utility aria2 is renowned for its speed and efficiency, but its default settings often limit its full potential. By default, aria2 restricts the number of simultaneous downloads and connections per se",
+    false
+  ],
+  [
+    20,
+    "How to Bypass SSL Certificate Check in aria2?",
+    "This article provides a direct solution for forcing the aria2 command-line download utility to skip SSL/TLS certificate validation when downloading files over HTTPS. You will learn the exact command-line flag required to bypass these verification checks,",
+    false
+  ],
+  [
+    19,
+    "How to Use HTTP Basic Authentication in aria2?",
+    "This article provides a straightforward guide on how to authenticate with a server that requires HTTP Basic Authentication when using the aria2 command-line download utility. You will learn the exact command-line syntax, how to handle special characters",
+    false
+  ],
+  [
+    18,
+    "Can you pass custom HTTP headers in aria2?",
+    "This article provides a straightforward guide on how to pass custom HTTP headers to a server using the aria2 command-line download utility. We will explore the specific command-line option required, look at practical examples for adding single or multipl",
+    false
+  ],
+  [
+    17,
+    "How Does aria2 Handle HTTP Redirects?",
+    "The lightweight, multi-protocol download utility aria2 manages HTTP redirects automatically to ensure seamless file transfers. When a server responds with a 3xx redirect status code, aria2 parses the new URL from the response headers, updates its downloa",
+    false
+  ],
+  [
+    16,
+    "Can aria2 Download Files via SFTP?",
+    "The aria2 download utility fully supports downloading files over the SFTP (SSH File Transfer Protocol) alongside other protocols like HTTP(S), FTP, and BitTorrent. Credentials can be passed securely to the application using inline URI formatting, dedicat",
+    false
+  ],
+  [
+    15,
+    "How to Force aria2 to Overwrite Existing Files?",
+    "This article provides a quick overview and practical guide on how to configure the aria2 download utility to automatically overwrite existing files on your disk without prompting for user input. By default, aria2 tends to resume downloads or create new f",
+    false
+  ],
+  [
+    14,
+    "What happens if aria2 finds a file with the same name?",
+    "When using the aria2 download utility, encountering an existing file with the same name in the target directory triggers specific default behaviors designed to prevent accidental data loss. By default, aria2 will not overwrite your existing file; instead",
+    false
+  ],
+  [
+    13,
+    "How to Download List of Files Using aria2?",
+    "This article provides a quick, practical guide on how to configure and use aria2, a lightweight multi-protocol command-line download utility, to download multiple files simultaneously from a text file list. You will learn how to prepare your input file,",
+    false
+  ],
+  [
+    12,
+    "How to Rename Downloads in aria2?",
+    "This article provides a quick overview and direct solution for changing the default filename of a download when using the aria2 command-line utility. By default, aria2 uses the filename provided by the remote server, but you can easily override this beha",
+    false
+  ],
+  [
+    11,
+    "How to Set Output Directory in aria2?",
+    "The aria2 command-line download utility allows users to specify a custom output directory for downloaded files using the -d (or --dir) option. By default, aria2 saves files in the current working directory from which the command is executed. By appending",
+    false
+  ],
+  [
+    10,
+    "Can aria2 be built from source code?",
+    "Yes, aria2 can be compiled and built directly from its source code, provided that your system has a compatible C++ compiler and the necessary development libraries installed. Building from source allows you to customize features, optimize the binary for",
+    false
+  ],
+  [
+    9,
+    "What Are the Hardware Resource Requirements for aria2?",
+    "This article provides a comprehensive overview of the hardware resource requirements needed to run the aria2 lightweight download utility efficiently. While aria2 is renowned for its minimal footprint, its resource consumption scales based on download sp",
+    false
+  ],
+  [
+    8,
+    "How can you view the complete aria2 help docs?",
+    "Viewing the complete help documentation for aria2 directly in the terminal can be achieved using native system manual commands or specific command-line flags built into the software. This article covers how to access the exhaustive system man page for ar",
+    false
+  ],
+  [
+    7,
+    "How to Download a File with aria2 Command Syntax?",
+    "The aria2 command-line utility is a lightweight, multi-protocol download tool that supports HTTP, HTTPS, FTP, SFTP, BitTorrent, and Metalink. Initiating a basic download requires only the aria2c command followed by the target URL. Because it automaticall",
+    false
+  ],
+  [
+    6,
+    "How Does aria2 Differ From Wget and Curl?",
+    "While standard command-line tools like wget and curl are excellent for straightforward, single-connection file downloads, aria2 is a lightweight, multi-protocol utility designed for maximum speed and flexibility. The primary difference lies in aria2's ab",
+    false
+  ],
+  [
+    5,
+    "Can aria2 download a file from multiple sources?",
+    "Yes, aria2 is fully capable of downloading a single file from multiple sources simultaneously. As a lightweight, multi-protocol command-line utility, it can combine bandwidth from different mirrors, servers, or even entirely different protocols (such as",
+    false
+  ],
+  [
+    4,
+    "Which Protocols Are Natively Supported by aria2?",
+    "aria2 is a lightweight, multi-protocol, and multi-source command-line download utility widely praised for its high efficiency and low resource usage. This article provides a comprehensive overview of the specific network protocols that aria2 natively sup",
+    false
+  ],
+  [
+    3,
+    "How to Check Installed aria2 Version in Terminal?",
+    "Checking the currently installed version of aria2 in your terminal is a quick and straightforward process that ensures you are running the most up-to-date and secure release of this lightweight download utility. This guide provides the exact command-line",
+    false
+  ],
+  [
+    2,
+    "Which Operating Systems Support aria2?",
+    "This article provides a comprehensive overview of the operating system compatibility for aria2, a lightweight, multi-protocol, and multi-source command-line download utility. It details the officially supported platforms—including Linux, Windows, and m",
+    false
+  ],
+  [
+    1,
+    "What is the Primary Function of aria2?",
+    "The command-line tool aria2 is a lightweight, multi-protocol, and multi-source download utility designed to maximize network bandwidth and accelerate file downloads. By supporting HTTP/HTTPS, FTP, SFTP, BitTorrent, and Metalink, it allows users to downlo",
+    false
+  ]
+]

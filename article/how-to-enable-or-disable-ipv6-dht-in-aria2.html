@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Enable or Disable IPv6 DHT in aria2? - aria2</title>
+    <meta name="description" content="Managing the Distributed Hash Table (DHT) for IPv6 networks in aria2 allows you to control how the download utility finds peers on modern network protocols. By default, aria2 enables DHT for IPv4, but IPv6 DHT must be configured explicitly depending on y">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/how-to-enable-or-disable-ipv6-dht-in-aria2">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Enable or Disable IPv6 DHT in aria2? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/how-to-enable-or-disable-ipv6-dht-in-aria2" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Managing the Distributed Hash Table (DHT) for IPv6 networks in aria2 allows you to control how the download utility finds peers on modern network protocols. By default, aria2 enables DHT for IPv4, but IPv6 DHT must be configured explicitly depending on y" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-enable-or-disable-ipv6-dht-in-aria2">How to Enable or
+Disable IPv6 DHT in aria2?</h1>
+<p>Managing the Distributed Hash Table (DHT) for IPv6 networks in aria2
+allows you to control how the download utility finds peers on modern
+network protocols. By default, aria2 enables DHT for IPv4, but IPv6 DHT
+must be configured explicitly depending on your network capabilities and
+privacy preferences. This guide provides the exact configuration
+parameters, command-line arguments, and best practices needed to
+successfully toggle this feature on or off.</p>
+<hr />
+<h3 id="understanding-ipv6-dht-in-aria2">Understanding IPv6 DHT in
+aria2</h3>
+<p>DHT allows bitTorrent clients to find peers without relying on a
+centralized tracker. While aria2 handles IPv4 DHT automatically, IPv6
+DHT operates on a separate configuration flag. Enabling it can vastly
+improve download speeds and peer availability on IPv6-native
+connections, while disabling it can reduce background network overhead
+and conserve bandwidth.</p>
+<hr />
+<h3 id="method-1-using-command-line-arguments">Method 1: Using
+Command-Line Arguments</h3>
+<p>If you run aria2 via the terminal on a case-by-case basis, you can
+pass the configuration flag directly into your execution command.</p>
+<ul>
+<li><strong>To Enable IPv6 DHT:</strong> Use the
+<code>--bt-enable-ipv6-dht=true</code> flag.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--bt-enable-ipv6-dht</span><span class="op">=</span>true <span class="st">&quot;your_torrent_link_or_magnet&quot;</span></span></code></pre></div>
+<ul>
+<li><strong>To Disable IPv6 DHT:</strong> Use the
+<code>--bt-enable-ipv6-dht=false</code> flag.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--bt-enable-ipv6-dht</span><span class="op">=</span>false <span class="st">&quot;your_torrent_link_or_magnet&quot;</span></span></code></pre></div>
+<hr />
+<h3 id="method-2-editing-the-configuration-file">Method 2: Editing the
+Configuration File</h3>
+<p>For a permanent solution, you can add the setting to your global
+aria2 configuration file (typically named <code>aria2.conf</code>). This
+ensures the setting persists every time you launch the application.</p>
+<ol type="1">
+<li>Open your <code>aria2.conf</code> file in a text editor.</li>
+<li>Add or modify the following line:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Desired Action</th>
+<th>Configuration Line to Add</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enable IPv6 DHT</strong></td>
+<td><code>bt-enable-ipv6-dht=true</code></td>
+</tr>
+<tr>
+<td><strong>Disable IPv6 DHT</strong></td>
+<td><code>bt-enable-ipv6-dht=false</code></td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="1">
+<li>Save the file and restart your aria2 session or daemon.</li>
+</ol>
+<hr />
+<h3 id="important-prerequisites">Important Prerequisites</h3>
+<p>For IPv6 DHT to function correctly when enabled, ensure that your
+broader network settings in aria2 are compatible.</p>
+<blockquote>
+<p><strong>Note:</strong> IPv6 DHT requires global IPv6 support to be
+active in aria2. Ensure that your configuration does not contain
+<code>enable-ipv6=false</code>, as disabling global IPv6 will override
+and deactivate the IPv6 DHT function entirely regardless of your BT
+settings.</p>
+</blockquote></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

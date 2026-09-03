@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does aria2 Manage Chunk Validation? - aria2</title>
+    <meta name="description" content="The multi-protocol download utility aria2 optimizes file transfers by splitting files into segments and downloading them concurrently, but its ability to validate chunks and recover from corruption depends heavily on the download protocol and metadata pr">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/how-does-aria2-manage-chunk-validation">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Does aria2 Manage Chunk Validation? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/how-does-aria2-manage-chunk-validation" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The multi-protocol download utility aria2 optimizes file transfers by splitting files into segments and downloading them concurrently, but its ability to validate chunks and recover from corruption depends heavily on the download protocol and metadata pr" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-does-aria2-manage-chunk-validation">How Does aria2 Manage
+Chunk Validation?</h1>
+<p>The multi-protocol download utility aria2 optimizes file transfers by
+splitting files into segments and downloading them concurrently, but its
+ability to validate chunks and recover from corruption depends heavily
+on the download protocol and metadata provided. While BitTorrent and
+Metalink transfers natively support robust, piece-by-piece cryptographic
+validation to isolate and re-download only the corrupted segments,
+standard HTTP(S) and FTP protocols lack inherent chunk-level checksums.
+For standard web downloads, aria2 relies on a companion
+<code>.aria2</code> control file to track progress, but it can only
+validate the absolute integrity of the completed file against an
+entire-file hash, meaning a single corrupted byte in a plain HTTP
+transfer often requires restarting the entire download.</p>
+<h3 id="protocol-level-differences-in-validation">Protocol-Level
+Differences in Validation</h3>
+<p>The strategy aria2 uses to handle corrupted data segments is
+fundamentally tied to the structural information available within the
+chosen download protocol.</p>
+<ul>
+<li><strong>BitTorrent and Metalink:</strong> These protocols supply
+explicit "piece hashes" within their metadata (the <code>.torrent</code>
+or <code>.metalink</code> file). Because the cryptographic signature for
+every individual chunk is known beforehand, aria2 evaluates each segment
+immediately upon receipt.</li>
+<li><strong>Standard HTTP(S)/FTP:</strong> Plain web transfers do not
+send piece-by-piece cryptographic metadata through standard headers.
+Consequently, aria2 cannot instantly pinpoint exactly which byte
+sequence suffered transit or storage corruption during a standard
+multi-connection HTTP download.</li>
+</ul>
+<h3 id="the-role-of-the-aria2-control-file">The Role of the .aria2
+Control File</h3>
+<p>To coordinate downloading different segments simultaneously, aria2
+creates a binary sidecar file with a <code>.aria2</code> extension
+alongside the target file.</p>
+<p>This control file is responsible for tracking chunk byte offsets,
+connection statuses, and allocated blocks. If a network drop or system
+crash occurs, aria2 reads this control file to safely resume writing
+exactly where it left off, avoiding full re-downloads. However, the
+control file merely maps download progress; it does not serve as a
+cryptographic validation matrix for individual HTTP chunks unless paired
+with explicit piece-hash metadata.</p>
+<h3 id="automatic-repair-via-chunk-hashes">Automatic Repair via Chunk
+Hashes</h3>
+<p>When utilizing BitTorrent or a Metalink configuration with the
+validation flag activated (<code>--check-integrity=true</code>), aria2
+actively protects against localized data corruption.</p>
+<p>If a specific chunk fails its hash validation check upon download,
+aria2 discards that segment immediately. It then flags that specific
+byte range as uncompleted within its internal tracker and allocates the
+exact same block to be re-downloaded from available mirrors or peers.
+This micro-targeted correction loop ensures that corrupt segments are
+fixed on the fly without altering or slowing down the valid segments
+being fetched in parallel.</p>
+<h3 id="entire-file-checksums-vs-full-re-downloads">Entire-File
+Checksums vs. Full Re-downloads</h3>
+<p>For standard HTTP(S) downloads where individual piece hashes are
+completely absent, users can still provide a full-file signature using
+the <code>--checksum</code> flag (such as specifying
+<code>sha-256=DIGEST</code>).</p>
+<p>In this scenario, aria2 cannot validate chunks dynamically during
+transit. It must wait until the file is completely assembled to match
+its total length. Once the download finishes, it runs a full integrity
+check. If a single segment was silently corrupted by a flaky network or
+a faulty storage drive, the final full-file hash check will fail.
+Because aria2 lacks the piece-level granularity to identify which
+connection brought down the bad data, it is forced to mark the entire
+file as corrupt and download it from scratch.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

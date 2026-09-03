@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does aria2 Differ From Wget and Curl? - aria2</title>
+    <meta name="description" content="While standard command-line tools like wget and curl are excellent for straightforward, single-connection file downloads, aria2 is a lightweight, multi-protocol utility designed for maximum speed and flexibility. The primary difference lies in aria2's ab">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/how-does-aria2-differ-from-wget-and-curl">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Does aria2 Differ From Wget and Curl? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/how-does-aria2-differ-from-wget-and-curl" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="While standard command-line tools like wget and curl are excellent for straightforward, single-connection file downloads, aria2 is a lightweight, multi-protocol utility designed for maximum speed and flexibility. The primary difference lies in aria2's ab" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-does-aria2-differ-from-wget-and-curl">How Does aria2 Differ
+From Wget and Curl?</h1>
+<p>While standard command-line tools like <code>wget</code> and
+<code>curl</code> are excellent for straightforward, single-connection
+file downloads, <code>aria2</code> is a lightweight, multi-protocol
+utility designed for maximum speed and flexibility. The primary
+difference lies in <code>aria2</code>'s ability to download a single
+file from multiple sources or via multiple concurrent connections
+simultaneously, while also supporting BitTorrent and Magnet links. This
+article breaks down the technical differences, performance advantages,
+and distinct use cases that separate <code>aria2</code> from traditional
+CLI downloaders.</p>
+<h3 id="multi-connection-and-segmented-downloading">Multi-Connection and
+Segmented Downloading</h3>
+<p>The most significant differentiator is how <code>aria2</code> handles
+data transfer. When you download a file using <code>wget</code> or
+<code>curl</code>, the utility opens a single connection to the server
+and streams the file from start to finish. If the server caps
+per-connection bandwidth, your download will be slow.</p>
+<p><code>aria2</code> utilizes segmented downloading. It can split a
+single file into multiple pieces and download those pieces concurrently
+over separate connections—either from the same server or from multiple
+mirror servers. This effectively bypasses per-connection speed limits
+and fully utilizes your available bandwidth.</p>
+<h3 id="multi-protocol-and-torrent-support">Multi-Protocol and Torrent
+Support</h3>
+<p>Standard downloaders are generally confined to traditional web
+protocols. <code>wget</code> and <code>curl</code> excel at handling
+HTTP, HTTPS, and FTP requests. <code>curl</code> goes a step further by
+supporting a vast array of protocols like SFTP, SCP, and SMB, making it
+a favorite for backend data transfer and API interactions.</p>
+<p><code>aria2</code> takes a completely different route by
+incorporating peer-to-peer (P2P) protocols. In addition to HTTP/HTTPS
+and FTP, it natively supports:</p>
+<ul>
+<li>BitTorrent (including magnet links, torrent files, DHT, and
+PEX)</li>
+<li>Metalink (an XML format that lists file mirrors, hashes, and
+cryptographic signatures)</li>
+</ul>
+<p>This allows you to pass a <code>.torrent</code> file or a Magnet URI
+directly into <code>aria2</code> just as easily as you would a standard
+URL.</p>
+<h3 id="remote-control-via-rpc-interfaces">Remote Control via RPC
+Interfaces</h3>
+<p>While <code>wget</code> and <code>curl</code> are strictly
+interactive or script-based command-line utilities, <code>aria2</code>
+can operate as a background daemon. It features a built-in JSON-RPC and
+XML-RPC interface.</p>
+<p>This capability allows developers to control <code>aria2</code>
+remotely. It serves as the backend engine for numerous third-party web
+interfaces, desktop applications, and browser extensions (such as
+AriaNg), essentially allowing you to turn a headless server or a
+Raspberry Pi into a full-featured, remote-controlled download
+manager.</p>
+<h3 id="summary-of-key-differences">Summary of Key Differences</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><code>wget</code></th>
+<th><code>curl</code></th>
+<th><code>aria2</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary Design</strong></td>
+<td>File downloading and web scraping</td>
+<td>Data transfer to/from servers (APIs)</td>
+<td>High-speed download management</td>
+</tr>
+<tr>
+<td><strong>Max Connections per Download</strong></td>
+<td>1</td>
+<td>1</td>
+<td>Multiple (Segmented)</td>
+</tr>
+<tr>
+<td><strong>BitTorrent / Magnet Support</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Remote Control (RPC)</strong></td>
+<td>No</td>
+<td>No</td>
+<td>Yes (JSON-RPC/XML-RPC)</td>
+</tr>
+<tr>
+<td><strong>Recursive Downloading</strong></td>
+<td>Yes (great for mirroring sites)</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="choosing-the-right-tool">Choosing the Right Tool</h3>
+<p>Your choice of tool depends entirely on the task at hand:</p>
+<ul>
+<li>Use <strong><code>wget</code></strong> if you need to recursively
+download an entire directory or mirror a website locally.</li>
+<li>Use <strong><code>curl</code></strong> if you are debugging APIs,
+writing automation scripts, or need precise control over HTTP headers
+and web cookies.</li>
+<li>Use <strong><code>aria2</code></strong> if you want to download
+large files (like Linux ISOs or zip archives) as fast as possible, or if
+you need a lightweight CLI tool to handle torrents.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

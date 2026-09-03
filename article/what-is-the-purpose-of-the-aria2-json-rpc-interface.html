@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is the Purpose of the aria2 JSON-RPC Interface? - aria2</title>
+    <meta name="description" content="The JSON-RPC interface in aria2 is a powerful programming interface that allows external applications and scripts to remotely control and interact with the aria2 download manager. By enabling this interface, developers and users can add, pause, remove, a">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/what-is-the-purpose-of-the-aria2-json-rpc-interface">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What is the Purpose of the aria2 JSON-RPC Interface? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/what-is-the-purpose-of-the-aria2-json-rpc-interface" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The JSON-RPC interface in aria2 is a powerful programming interface that allows external applications and scripts to remotely control and interact with the aria2 download manager. By enabling this interface, developers and users can add, pause, remove, a" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="what-is-the-purpose-of-the-aria2-json-rpc-interface">What is the
+Purpose of the aria2 JSON-RPC Interface?</h1>
+<p>The JSON-RPC interface in aria2 is a powerful programming interface
+that allows external applications and scripts to remotely control and
+interact with the aria2 download manager. By enabling this interface,
+developers and users can add, pause, remove, and monitor downloads from
+separate software, web browsers, or custom automation scripts. This
+capability effectively transforms aria2 from a standard command-line
+utility into a highly versatile, headless download engine that can be
+integrated into any custom software ecosystem.</p>
+<h3 id="remote-control-and-headless-operation">Remote Control and
+Headless Operation</h3>
+<p>At its core, the JSON-RPC interface enables headless operation,
+meaning aria2 can run in the background on a local machine, a home
+server, or a remote Virtual Private Server (VPS) without a traditional
+graphical user interface. External programs communicate with it by
+sending structured JSON data over HTTP or WebSockets. This allows you to
+manage heavy download queues on a powerful remote server from the
+comfort of your local desktop or mobile device.</p>
+<h3 id="powering-web-uis-and-third-party-extensions">Powering Web UIs
+and Third-Party Extensions</h3>
+<p>Because aria2 lacks a built-in graphical interface, the developer
+community relies heavily on the JSON-RPC interface to build intuitive
+web-based frontends. Popular web UIs like AriaNg, webui-aria2, and
+various browser extensions use this interface to display download
+speeds, progress bars, and file management options. When you click a
+download link in a browser extension and it seamlessly transfers to
+aria2, the JSON-RPC interface is the bridge making that automation
+possible.</p>
+<h3 id="automation-and-scripted-workflows">Automation and Scripted
+Workflows</h3>
+<p>For advanced users and developers, the JSON-RPC interface opens up
+extensive possibilities for automation. You can write scripts in Python,
+JavaScript, or Bash to programmatically interact with aria2. This allows
+for complex workflows, such as:</p>
+<ul>
+<li>Automatically triggering torrent downloads when a new file appears
+in an RSS feed.</li>
+<li>Pausing specific downloads during peak internet usage hours and
+resuming them at night.</li>
+<li>Sending system notifications or emails the exact moment a massive
+file finishes downloading.</li>
+</ul>
+<h3 id="supported-functionality">Supported Functionality</h3>
+<p>The interface exposes nearly every feature available in the standard
+command-line version of aria2. Through RPC method calls, external
+applications can:</p>
+<ul>
+<li><strong>Manage Downloads:</strong> Add URIs, torrent files, and
+magnet links, as well as pause, resume, and force-remove specific
+tasks.</li>
+<li><strong>Query Status:</strong> Fetch real-time global download
+speeds, individual file progress, and detailed error codes if a download
+fails.</li>
+<li><strong>Change Settings:</strong> Dynamically alter configuration
+options on the fly, such as adjusting the maximum download speed limit
+without needing to restart the aria2 daemon.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

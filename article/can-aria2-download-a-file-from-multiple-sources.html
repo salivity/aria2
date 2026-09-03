@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can aria2 download a file from multiple sources? - aria2</title>
+    <meta name="description" content="Yes, aria2 is fully capable of downloading a single file from multiple sources simultaneously. As a lightweight, multi-protocol command-line utility, it can combine bandwidth from different mirrors, servers, or even entirely different protocols (such as">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/can-aria2-download-a-file-from-multiple-sources">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Can aria2 download a file from multiple sources? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/can-aria2-download-a-file-from-multiple-sources" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Yes, aria2 is fully capable of downloading a single file from multiple sources simultaneously. As a lightweight, multi-protocol command-line utility, it can combine bandwidth from different mirrors, servers, or even entirely different protocols (such as" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="can-aria2-download-a-file-from-multiple-sources">Can aria2
+download a file from multiple sources?</h1>
+<p>Yes, aria2 is fully capable of downloading a single file from
+multiple sources simultaneously. As a lightweight, multi-protocol
+command-line utility, it can combine bandwidth from different mirrors,
+servers, or even entirely different protocols (such as HTTP, FTP, SFTP,
+and BitTorrent) to download one file faster. By splitting the target
+file into segments, aria2 fetches separate pieces from each designated
+location at the same time and seamlessly reassembles them upon
+completion.</p>
+<h2 id="how-multi-source-downloading-works-in-aria2">How Multi-Source
+Downloading Works in aria2</h2>
+<p>When you provide aria2 with multiple URLs for the same file, it
+utilizes segmented downloading. The engine divides the file size into
+uniform chunks. If you have provided two different mirrors, aria2 will
+assign specific chunk ranges to Mirror A and other chunk ranges to
+Mirror B.</p>
+<p>This process isn't limited to a single protocol. For instance, aria2
+can download parts of a file from an HTTP web server while concurrently
+pulling other parts of the exact same file from a BitTorrent swarm.
+While it downloads from the HTTP/FTP sources, it can even upload those
+finished segments to the BitTorrent peers, maximizing network
+efficiency.</p>
+<h2 id="command-line-examples">Command-Line Examples</h2>
+<p>To download a single file from multiple sources via the command line,
+you simply append the various URLs to the end of your command, separated
+by a space.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="st">&quot;http://server1.com/file.zip&quot;</span> <span class="st">&quot;http://server2.com/file.zip&quot;</span> <span class="st">&quot;ftp://server3.com/file.zip&quot;</span></span></code></pre></div>
+<p>If you prefer to organize your links inside a text file, you can
+utilize an input file. In this setup, multiple sources for a single file
+must be placed on the exact same line, separated by a
+<strong>TAB</strong> character.</p>
+<pre class="text"><code>http://server1.com/file.zip http://server2.com/file.zip ftp://server3.com/file.zip
+</code></pre>
+<p>You can then execute the download by pointing aria2 to that list:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">-i</span> download_list.txt</span></code></pre></div>
+<h2 id="important-settings-for-multi-source-performance">Important
+Settings for Multi-Source Performance</h2>
+<p>To ensure aria2 distributes the load properly across your sources,
+you need to be aware of two specific parameters:</p>
+<ul>
+<li><strong><code>--split</code> (or <code>-s</code>)</strong>: This
+defines the total number of connections or splits used for the file
+download. If you have 3 sources but your split value is set to 1, aria2
+will only pull from the first available source. To utilize multiple
+sources, ensure that the split number is equal to or greater than the
+number of sources.</li>
+<li><strong><code>--min-split-size</code> (or <code>-k</code>)</strong>:
+This determines the minimum size of a segment. By default, this is often
+set to 20MB. If a file is smaller than twice the minimum split size,
+aria2 will refuse to split it, causing it to fall back to a single
+source connection regardless of how many URLs you supplied.</li>
+</ul>
+<p>Adjusting these settings ensures that the application successfully
+splits the workload across all available mirrors, allowing you to
+maximize your total available internet bandwidth.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

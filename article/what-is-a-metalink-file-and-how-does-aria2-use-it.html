@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is a Metalink File and How Does aria2 Use It? - aria2</title>
+    <meta name="description" content="A Metalink file is an XML-based document that aggregates multiple download sources, verification checksums, and file metadata into a single package to improve download speed and reliability. When processed by aria2—a lightweight, multi-protocol command">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/what-is-a-metalink-file-and-how-does-aria2-use-it">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What Is a Metalink File and How Does aria2 Use It? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/what-is-a-metalink-file-and-how-does-aria2-use-it" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="A Metalink file is an XML-based document that aggregates multiple download sources, verification checksums, and file metadata into a single package to improve download speed and reliability. When processed by aria2—a lightweight, multi-protocol command" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="what-is-a-metalink-file-and-how-does-aria2-use-it">What Is a
+Metalink File and How Does aria2 Use It?</h1>
+<p>A Metalink file is an XML-based document that aggregates multiple
+download sources, verification checksums, and file metadata into a
+single package to improve download speed and reliability. When processed
+by aria2—a lightweight, multi-protocol command-line download utility—the
+Metalink file allows the client to orchestrate simultaneous downloads
+from various servers and peer-to-peer networks while automatically
+repairing any corrupted data segments. This combination maximizes
+bandwidth efficiency and ensures error-free file completion.</p>
+<h2 id="understanding-the-metalink-format">Understanding the Metalink
+Format</h2>
+<p>Traditional downloads rely on a single URL, creating a single point
+of failure if a server goes offline or throttles speeds. A Metalink file
+(<code>.metalink</code>) solves this by listing mirror URLs, BitTorrent
+torrents, and Magnet links for the exact same file. It also contains
+cryptographic hashes (such as SHA-256 or MD5) for the entire file and
+its individual segments. By bundling this information together, a
+Metalink file provides download clients with a complete roadmap for
+acquiring data securely and efficiently from multiple locations at
+once.</p>
+<h2 id="how-aria2-utilizes-metalink-for-reliable-downloads">How aria2
+Utilizes Metalink for Reliable Downloads</h2>
+<p>The aria2 utility is uniquely engineered to leverage the full suite
+of features embedded within a Metalink file. When you feed a Metalink
+file into aria2, the client executes several automated processes to
+optimize the download:</p>
+<ul>
+<li><strong>Multi-Source Chunk Downloading:</strong> aria2 reads the
+available mirrors and protocols listed in the Metalink file. It then
+splits the target file into smaller pieces and downloads different
+chunks simultaneously from different servers, effectively multiplying
+your download speed.</li>
+<li><strong>Automatic Failover:</strong> If one server goes offline or
+encounters a network error midway through the transfer, aria2 seamlessly
+switches to another mirror listed in the Metalink file without
+interrupting the overall download progress.</li>
+<li><strong>Segment-Level Verification:</strong> Instead of waiting
+until the end of a multi-gigabyte download to discover a file is
+corrupted, aria2 uses the segment hashes in the Metalink file to verify
+each chunk as soon as it arrives. If a specific piece fails the checksum
+test, aria2 discards only that corrupted segment and redownloads it from
+an alternate source.</li>
+<li><strong>Protocol Flexibility:</strong> Because aria2 supports HTTP,
+HTTPS, FTP, and BitTorrent, it can download segments from a standard web
+mirror and a torrent swarm at the exact same time, choosing the fastest
+paths available.</li>
+</ul>
+<h2 id="benefits-of-using-aria2-with-metalink">Benefits of Using aria2
+with Metalink</h2>
+<p>Using aria2 alongside Metalink files offers distinct advantages over
+standard web browsers or single-protocol download managers. It
+drastically reduces download failures on unstable connections, as the
+client can infinitely adapt to dropped mirrors. Furthermore, the
+built-in integrity checks guarantee that the finalized file is an exact,
+uncorrupted replica of the original source, eliminating the need for
+manual post-download verification.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

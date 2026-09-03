@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can aria2 Automatically Extract Archives After Downloading? - aria2</title>
+    <meta name="description" content="While aria2 is a highly efficient, lightweight, and multi-protocol command-line download utility, it does not have a built-in, native feature to automatically extract compressed archives like .zip, .tar.gz, or .rar files upon completion. However, aria2 p">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/can-aria2-automatically-extract-archives-after-downloading">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Can aria2 Automatically Extract Archives After Downloading? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/can-aria2-automatically-extract-archives-after-downloading" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="While aria2 is a highly efficient, lightweight, and multi-protocol command-line download utility, it does not have a built-in, native feature to automatically extract compressed archives like .zip, .tar.gz, or .rar files upon completion. However, aria2 p" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="can-aria2-automatically-extract-archives-after-downloading">Can
+aria2 Automatically Extract Archives After Downloading?</h1>
+<p>While aria2 is a highly efficient, lightweight, and multi-protocol
+command-line download utility, it does not have a built-in, native
+feature to automatically extract compressed archives like
+<code>.zip</code>, <code>.tar.gz</code>, or <code>.rar</code> files upon
+completion. However, aria2 provides a powerful event-hook system via the
+<code>--on-download-complete</code> option. This allows users to trigger
+custom external scripts that automatically handle the extraction process
+the moment a download finishes.</p>
+<hr />
+<h3 id="understanding-aria2s-core-functionality">Understanding aria2's
+Core Functionality</h3>
+<p>The primary design philosophy behind aria2 is to be an ultra-fast,
+resource-light downloader supporting HTTP(S), FTP, SFTP, BitTorrent, and
+Metalink. Because it focuses strictly on data transfer efficiency,
+features like file manipulation, archive extraction, or file renaming
+are intentionally excluded from the core binary.</p>
+<p>To achieve automation, aria2 offloads post-processing tasks to the
+operating system's shell using environment variables passed directly to
+a user-defined script.</p>
+<hr />
+<h3 id="how-to-automate-extraction-using-scripts">How to Automate
+Extraction Using Scripts</h3>
+<p>To automatically extract archives, you must create a shell script
+(for Linux/macOS) or a batch file (for Windows) and instruct aria2 to
+execute it using the following command-line argument:</p>
+<p><code>aria2c --on-download-complete=/path/to/script.sh "download_url"</code></p>
+<p>When a download finishes, aria2 automatically executes the script and
+passes three arguments to it:</p>
+<ol type="1">
+<li><strong>GID</strong>: The unique download ID assigned by aria2.</li>
+<li><strong>Number of files</strong>: The total count of files in the
+download.</li>
+<li><strong>File path</strong>: The absolute path of the first
+downloaded file.</li>
+</ol>
+<hr />
+<h3 id="example-automation-script-linuxmacos">Example Automation Script
+(Linux/macOS)</h3>
+<p>Below is an example of a simple Bash script (<code>extract.sh</code>)
+that reads the file path provided by aria2, checks if the file is a
+compressed archive, and extracts it to the destination directory.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># aria2 passes the file path as the third argument ($3)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">FILE_PATH</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$3</span><span class="st">&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract based on file extension</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="st">&quot;</span><span class="va">$FILE_PATH</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="ss">.zip</span><span class="kw">)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">unzip</span> <span class="at">-d</span> <span class="st">&quot;</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">$FILE_PATH</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$FILE_PATH</span><span class="st">&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="ss">.tar.gz</span><span class="kw">|</span><span class="pp">*</span><span class="ss">.tgz</span><span class="kw">)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tar</span> <span class="at">-xzf</span> <span class="st">&quot;</span><span class="va">$FILE_PATH</span><span class="st">&quot;</span> <span class="at">-C</span> <span class="st">&quot;</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">$FILE_PATH</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="ss">.tar.bz2</span><span class="kw">|</span><span class="pp">*</span><span class="ss">.tbz2</span><span class="kw">)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tar</span> <span class="at">-xjf</span> <span class="st">&quot;</span><span class="va">$FILE_PATH</span><span class="st">&quot;</span> <span class="at">-C</span> <span class="st">&quot;</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">$FILE_PATH</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="pp">*</span><span class="kw">)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;Downloaded file is not a supported archive or does not need extraction.&quot;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">;;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">esac</span></span></code></pre></div>
+<p>Before running aria2 with this script, ensure you grant execution
+permissions to the script using the command
+<code>chmod +x extract.sh</code>.</p>
+<hr />
+<h3 id="making-the-setup-permanent">Making the Setup Permanent</h3>
+<p>If you do not want to type the <code>--on-download-complete</code>
+flag every time you download a file, you can add this setting
+permanently to your aria2 configuration file
+(<code>aria2.conf</code>).</p>
+<p>Open your configuration file and add the following line:</p>
+<pre class="text"><code>on-download-complete=/path/to/extract.sh
+</code></pre>
+<p>With this configuration in place, aria2 will actively monitor every
+completed download and seamlessly run your extraction script in the
+background without requiring further manual intervention.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Save aria2 Session State to a File? - aria2</title>
+    <meta name="description" content="This article provides a quick overview and step-by-step guide on how to force the aria2 command-line download utility to save its current download session state to a file. By default, aria2 does not automatically save your download progress in a readable">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/how-to-save-aria2-session-state-to-a-file">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Save aria2 Session State to a File? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/how-to-save-aria2-session-state-to-a-file" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a quick overview and step-by-step guide on how to force the aria2 command-line download utility to save its current download session state to a file. By default, aria2 does not automatically save your download progress in a readable" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-save-aria2-session-state-to-a-file">How to Save aria2
+Session State to a File?</h1>
+<p>This article provides a quick overview and step-by-step guide on how
+to force the <code>aria2</code> command-line download utility to save
+its current download session state to a file. By default,
+<code>aria2</code> does not automatically save your download progress in
+a readable format unless configured to do so. This guide covers how to
+save your session automatically using the <code>--save-session</code>
+flag, how to specify the saving interval, and how to resume your
+downloads later using the saved session file.</p>
+<h2 id="understanding-the-aria2-session-file">Understanding the aria2
+Session File</h2>
+<p>When downloading large files or managing multiple downloads
+simultaneously, unexpected interruptions like power outages or network
+drops can disrupt your progress. While <code>aria2</code> is highly
+efficient, it requires a dedicated session file to remember the exact
+state of active, paused, or queued downloads. Without this file, you
+would have to manually re-add every URL or torrent file to restart your
+downloads.</p>
+<h2 id="step-1-saving-the-session-on-exit">Step 1: Saving the Session on
+Exit</h2>
+<p>The most common way to ensure your session is saved is to tell
+<code>aria2</code> where to write the session data when the program
+terminates or encounters an error. You do this by using the
+<code>--save-session</code> option followed by the path to your desired
+text file.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--save-session</span><span class="op">=</span>/path/to/session.txt <span class="st">&quot;URL&quot;</span></span></code></pre></div>
+<p>If you want <code>aria2</code> to automatically create this file even
+if no downloads are currently active or if the file doesn't exist yet,
+you should also include the <code>--force-save</code> option.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--save-session</span><span class="op">=</span>/path/to/session.txt <span class="at">--force-save</span><span class="op">=</span>true <span class="st">&quot;URL&quot;</span></span></code></pre></div>
+<h2 id="step-2-saving-the-session-periodically-auto-save">Step 2: Saving
+the Session Periodically (Auto-Save)</h2>
+<p>Forcing a save only when the program exits might not protect you if
+your entire system crashes suddenly. To fix this, you can force
+<code>aria2</code> to save its current state to the session file at
+regular time intervals using the <code>--save-session-interval</code>
+option. The interval is specified in seconds.</p>
+<p>To save your download state every 60 seconds, use the following
+command:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">--save-session</span><span class="op">=</span>/path/to/session.txt <span class="at">--save-session-interval</span><span class="op">=</span>60 <span class="st">&quot;URL&quot;</span></span></code></pre></div>
+<h2 id="step-3-how-to-resume-downloads-using-the-session-file">Step 3:
+How to Resume Downloads Using the Session File</h2>
+<p>Once you have successfully forced <code>aria2</code> to save its
+session state to a file, you can easily restore all of your downloads
+the next time you open the terminal. Instead of passing the original
+download URLs, you pass the session file using the <code>-i</code> (or
+<code>--input-file</code>) option.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">-i</span> /path/to/session.txt</span></code></pre></div>
+<p>To maintain continuous protection, it is best practice to combine the
+input and output options into a single command. This ensures that
+<code>aria2</code> reads your old progress and immediately begins saving
+your new progress to the exact same file:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aria2c</span> <span class="at">-i</span> /path/to/session.txt <span class="at">--save-session</span><span class="op">=</span>/path/to/session.txt <span class="at">--save-session-interval</span><span class="op">=</span>60</span></code></pre></div>
+<h2 id="making-the-configuration-permanent">Making the Configuration
+Permanent</h2>
+<p>If you do not want to type these long commands every time you use the
+utility, you can add these settings to your global <code>aria2</code>
+configuration file (usually located at <code>~/.aria2/aria2.conf</code>
+on Linux/macOS).</p>
+<p>Open your configuration file and add the following lines:</p>
+<pre class="text"><code>input-file=/path/to/session.txt
+save-session=/path/to/session.txt
+save-session-interval=60
+force-save=true
+</code></pre>
+<p>With these lines in your configuration file, simply running
+<code>aria2c</code> without any extra arguments will automatically load
+your last session and continuously save your progress every minute.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

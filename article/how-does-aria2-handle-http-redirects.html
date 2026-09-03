@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does aria2 Handle HTTP Redirects? - aria2</title>
+    <meta name="description" content="The lightweight, multi-protocol download utility aria2 manages HTTP redirects automatically to ensure seamless file transfers. When a server responds with a 3xx redirect status code, aria2 parses the new URL from the response headers, updates its downloa">
+    <link rel="canonical" href="https://salivity.github.io/aria2/article/how-does-aria2-handle-http-redirects">
+    <link rel="icon" href="/aria2/favicon.ico">
+    <link rel="stylesheet" href="/aria2/css/style.css">
+    <link media="print" rel="stylesheet" href="/aria2/css/print.css">
+    <script src="/aria2/js/fuse.min.js"></script>
+    <script src="/aria2/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <script src="/monetize/monetize.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Does aria2 Handle HTTP Redirects? - aria2" />
+    <meta property="og:url" content="https://salivity.github.io/aria2/article/how-does-aria2-handle-http-redirects" />
+    <meta property="og:image:url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/aria2/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The lightweight, multi-protocol download utility aria2 manages HTTP redirects automatically to ensure seamless file transfers. When a server responds with a 3xx redirect status code, aria2 parses the new URL from the response headers, updates its downloa" />
+    <link rel="manifest" href="/aria2/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/aria2/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>aria2</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/aria2/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-does-aria2-handle-http-redirects">How Does aria2 Handle HTTP
+Redirects?</h1>
+<p>The lightweight, multi-protocol download utility
+<strong>aria2</strong> manages HTTP redirects automatically to ensure
+seamless file transfers. When a server responds with a 3xx redirect
+status code, aria2 parses the new URL from the response headers, updates
+its download queue, and transparently reconnects to the new destination.
+This article explores the mechanics behind this process, including
+default behaviors, security protocols, and configuration options for
+customizing redirect limits.</p>
+<h3 id="the-standard-redirect-flow">The Standard Redirect Flow</h3>
+<p>When you initiate an HTTP/HTTPS download, aria2 acts as a robust
+client that expects standard server responses. If a server issues a
+redirect, the utility processes it through a specific sequence:</p>
+<ul>
+<li><strong>Status Code Detection:</strong> aria2 detects HTTP status
+codes indicating a redirect, primarily <strong>301</strong> (Moved
+Permanently), <strong>302</strong> (Found), <strong>303</strong> (See
+Other), and <strong>307</strong> (Temporary Redirect).</li>
+<li><strong>Header Parsing:</strong> The utility inspects the
+<code>Location</code> field within the HTTP response header to extract
+the target URL.</li>
+<li><strong>Connection Migration:</strong> aria2 drops the current
+connection smoothly, updates the download target to the new URL, and
+initiates a fresh handshake with the destination server without
+requiring user intervention.</li>
+</ul>
+<h3 id="managing-redirect-limits">Managing Redirect Limits</h3>
+<p>To prevent infinite loops—where a misconfigured server repeatedly
+redirects a request back to itself or in a circle—aria2 employs a
+built-in safety mechanism.</p>
+<p>By default, aria2 sets a maximum number of sequential redirects it
+will follow. If a download exceeds this threshold, aria2 will terminate
+the process and log an error to protect system resources. Users can
+customize this behavior using the following command-line option:</p>
+<p><code>--max-file-not-found=NUMBER</code></p>
+<p>While this flag primarily controls how aria2 handles "File Not Found"
+errors, severe redirect loops that fail to resolve to a valid file
+payload will eventually trigger aria2's error-handling thresholds,
+halting the task safely.</p>
+<h3 id="handling-protocols-and-security-boundary-changes">Handling
+Protocols and Security Boundary Changes</h3>
+<p>Redirects often involve moving from an insecure protocol to a secure
+one, or vice versa. aria2 handles these transitions with specific
+security considerations:</p>
+<ul>
+<li><strong>HTTP to HTTPS:</strong> This is the most common redirect.
+aria2 seamlessly upgrades the connection, establishes a TLS/SSL
+handshake, and verifies the server certificates as configured.</li>
+<li><strong>HTTPS to HTTP:</strong> If a redirect attempts to downgrade
+a secure connection to an unencrypted one, aria2 will still follow it by
+default, but users must remain cautious of potential man-in-the-middle
+risks depending on the network environment.</li>
+<li><strong>Authentication and Headers:</strong> When a redirect occurs,
+sensitive custom HTTP headers (like authorization tokens) supplied in
+the initial command are evaluated carefully. aria2 generally avoids
+forwarding sensitive credentials to a completely different domain to
+prevent data leaks.</li>
+</ul>
+<h3 id="multi-connection-redirect-handling">Multi-Connection Redirect
+Handling</h3>
+<p>One of aria2's core strengths is its ability to download a single
+file from multiple sources or using multiple connections simultaneously
+(<code>-s</code> and <code>-x</code> flags).</p>
+<p>If you allocate five connections to a single HTTP URL, and that URL
+issues a redirect, <strong>all allocated connections</strong> will
+follow the redirect to the new location. If the target server limits
+connections per IP, aria2 adjusts accordingly based on its
+connection-throttling algorithms, ensuring that the accelerated download
+architecture remains intact even after shifting to the redirected
+host.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/aria2'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/aria2/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/aria2/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>
