@@ -1,0 +1,22 @@
+{
+  "short_name": "aria2",
+  "name": "aria2",
+  "icons": [
+    {
+      "src": "/aria2/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/aria2/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "https://salivity.github.io/aria2",
+  "background_color": "#F0F4F8",
+  "theme_color": "#F0F4F8",
+  "display": "standalone",
+  "orientation": "portrait"
+}
